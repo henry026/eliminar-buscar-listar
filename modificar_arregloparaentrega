@@ -1,0 +1,117 @@
+using System;
+using System.Collections.Generic;
+using System.Collections; 
+using System.Linq;
+using System.Text;
+namespace Arreglos_Consola_Generico
+{
+class Program
+{
+static ArrayList Arreglo = new ArrayList();
+static void Main(string[] args)
+{
+Int16 opcion = 0;
+do
+{
+Console.Clear();
+Console.WriteLine("ARREGLO USANDO COLECCIONES GENÉRICAS\n");
+Console.WriteLine("\n1.- Insertar dato");
+Console.WriteLine("2.- Eliminar dato");
+Console.WriteLine("3.- Ordenar datos del arreglo");
+Console.WriteLine("4.- Mostrar datos del arreglo");
+Console.WriteLine("5.- Mostrar el dato mayor");
+Console.WriteLine("6.- Eliminar todos los datos (Vaciar)");
+Console.WriteLine("0.- Salir");
+Console.Write("\n\nOpción ? ");
+opcion = Int16.Parse(Console.ReadLine());
+switch (opcion)
+{
+case 1: InsertarEnArreglo(); break;
+case 2: EliminarEnArreglo(); break;
+case 3: OrdenarArreglo(); break;
+case 4: MostrarArreglo(); break;
+case 5: BuscarMayor(); break;
+case 6: VaciarArreglo(); break;
+}
+} while (opcion != 0);
+}
+public static void InsertarEnArreglo()
+{
+int Dato = 0;
+Console.Clear();
+Console.WriteLine("INSERTAR DATO EN EL ARREGLO GENÉRICO");
+Console.Write("\nNúmero ? ");
+Dato = int.Parse(Console.ReadLine()); // Captura el dato entero que se desea insertar
+// Se invoca el método Add de la clase genérica ArrayList
+Arreglo.Add(Dato); // Se agrega el Dato al Arreglo
+Console.WriteLine("\nDato agregado al arreglo !!!");
+Console.ReadKey();
+}
+public static void EliminarEnArreglo()
+{
+int Dato = 0;
+Console.Clear();
+Console.WriteLine("ELIMINAR DATO DEL ARREGLO GENÉRICO\n");
+Console.Write("\nNúmero ? ");
+Dato = int.Parse(Console.ReadLine()); // Captura el dato que se desea eliminar
+if (Arreglo.Contains(Dato)) // Verifica si el dato está almacenado en el arreglo
+{
+Arreglo.Remove(Dato); // Elimina el dato
+Console.WriteLine("\nDato eliminado con éxito !!!");
+}
+else
+Console.WriteLine("\nEl dato no se encuentra almacenado en el arreglo...");
+Console.ReadKey();
+}
+public static void OrdenarArreglo()
+{
+Console.Clear();
+Arreglo.Sort(); // Ordena el arreglo en forma ascendente
+Console.WriteLine("\nArreglo ordenado en forma ascendente");
+Console.ReadKey();
+}
+public static void MostrarArreglo()
+{
+Console.Clear();
+Console.WriteLine("DATOS DEL ARREGLO GENÉRICO\n");
+// Recorre cada celda del arreglo
+foreach(int Dato in Arreglo)
+Console.WriteLine(Dato); // Despliega los datos del arreglo
+// Muestra la cantidad de datos almacenados
+Console.WriteLine("\nCantidad de datos almacenados en el arreglo genérico: " + Arreglo.Count);
+Console.ReadKey();
+}
+public static void BuscarMayor()
+{
+Console.Clear();
+Console.WriteLine("BÚSQUEDA DEL DATO MAYOR DEL ARREGLO GENÉRICO\n");
+// Inicializa la variable Mayor con el primer valor del Arreglo
+int Mayor = int.Parse(Arreglo[0].ToString());
+// Recorre cada celda del Arreglo
+foreach(int Dato in Arreglo)
+if (Dato > Mayor) // Comparación
+Mayor = Dato;
+Console.WriteLine("\nEl dato mayor es: " + Mayor);
+Console.ReadKey();
+}
+public static void VaciarArreglo()
+{
+char sn;
+Console.Clear();
+Console.WriteLine("ELIMINAR TODOS LOS ELEMENTOS DEL ARREGLO (VACIAR)\n");
+// Solicita al usuario que confirme la operación
+do
+{
+Console.Write("¿Está seguro que desea vaciar el arreglo [S/N] ? ");
+sn = char.Parse(Console.ReadLine());
+sn = Char.ToUpper(sn); // Convierte a mayúsculas el caracter capturado
+} while (sn != 'S' && sn != 'N');
+if (sn == 'S') // Si se confirma la operación ...
+{
+Arreglo.Clear(); // Invoca el método Clear para limpiar el arreglo
+Console.WriteLine("\n\nSe eliminaron todos los elementos del arreglo !!!");
+Console.ReadKey();
+}
+}
+}
+}
